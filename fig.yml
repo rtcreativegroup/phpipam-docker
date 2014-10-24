@@ -1,0 +1,12 @@
+mysql:
+  image: mysql:latest
+  environment:
+    - MYSQL_ROOT_PASSWORD=phpipamadmin
+    - MYSQL_USER=phpipam
+    - MYSQL_PASSWORD=phpipamadmin
+phpipam:
+  build: .
+  links:
+    - mysql:mysql
+  ports:
+    - "80:80"
