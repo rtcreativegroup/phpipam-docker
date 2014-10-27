@@ -2,10 +2,10 @@
 
 /*	database connection details
  ******************************/
-$db['host'] = "mysql";
-$db['user'] = "root";
-$db['pass'] = "phpipamadmin";
-$db['name'] = "phpipam";
+$db['host'] = getenv("MYSQL_DB_HOSTNAME");
+$db['user'] = getenv("MYSQL_DB_USERNAME");
+$db['pass'] = getenv("MYSQL_DB_PASSWORD");
+$db['name'] = getenv("MYSQL_DB_NAME");
 
 /**
  * php debugging on/off
