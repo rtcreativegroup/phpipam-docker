@@ -1,9 +1,13 @@
 FROM debian:wheezy
 
+ENV PHPIPAM_SOURCE https://github.com/phpipam/phpipam/archive/
+ENV PHPIPAM_VERSION 1.16.003
+
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get -y install apache2 libapache2-mod-php5 php5-mysql vim curl php5-gmp php5-ldap php-pear && apt-get clean
 
-RUN curl -L "http://downloads.sourceforge.net/project/phpipam/phpipam-1.0.tar" > /tmp/phpipam.tar
-RUN rm -fr /var/www/html && cd /tmp && tar -xvf phpipam.tar && mv /tmp/phpipam /var/www/html
+ADD ${PHPIPAM_SOURCE}/${PHPIPAM_VERSION}.tar.gz /tmp/
+RUN mkdir /var/www/html/
+RUN tar -xzf /tmp/${PHPIPAM_VERSION}.tar.gz -C /var/www/html/ --strip-components=1
 COPY config.php /var/www/html/config.php
 COPY 000-default.conf /etc/apache2/sites-available/default
 
